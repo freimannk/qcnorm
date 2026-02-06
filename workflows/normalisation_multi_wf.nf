@@ -30,7 +30,7 @@ def add_to_qtlmap_input_tsv(qtlgroup_quantiletpm_ch, quant_method) {
                             median_tpm: "${params.outdir}/${item[0]}/normalised/ge/qtl_group_median_tpms/${item[0]}_ge_${item[1]}_median_tpm.tsv.gz"
                         ] },
         majiq       : { item -> [
-                            normalized_matrix: "${params.outdir}/${item[0]}/normalised/${quant_method}/${item[0]}.${item[1]}.tsv.gz",
+                            normalized_matrix: "${params.outdir}/${item[0]}/normalised/${quant_method}/qtl_group_split_norm/${item[0]}.${item[1]}.tsv.gz",
                             phenotype_metadata: "${params.outdir}/${item[0]}/normalised/${quant_method}/${item[0]}.${item[1]}_majiq_metadata.tsv.gz",
                             median_tpm: "${params.outdir}/${item[0]}/normalised/ge/qtl_group_median_tpms/${item[0]}_ge_${item[1]}_median_tpm.tsv.gz"
                         ] },

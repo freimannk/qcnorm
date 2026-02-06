@@ -103,7 +103,7 @@ process format_majiq_inputs{
 }
 
 process normalise_RNAseq_majiq{
-    publishDir "${params.outdir}/$study_id/normalised/majiq", mode: 'copy'
+    publishDir "${params.outdir}/$study_id/normalised/majiq/qtl_group_split_norm", mode: 'copy'
     container = "quay.io/eqtlcatalogue/eqtlutils:v25.10.1"
     
     input:
