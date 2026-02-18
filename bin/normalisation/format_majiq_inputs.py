@@ -60,8 +60,13 @@ def main(phenotype_metadata,psi_matrix,sample_metadata,QC,KEEP_XY):
 
     print("Loading phenotype metadata...")
     ph_meta = (
-        pl.read_csv(phenotype_metadata, separator="\t",schema_overrides={"chromosome": pl.Utf8})
-        .drop(["phenotype_id", "quant_id"], strict=False)
+    pl.scan_csv(
+        phenotype_metadata,
+        separator="\t",
+        schema_overrides={"chromosome": pl.Utf8}
+    )
+    .select(pl.exclude(["phenotype_id", "quant_id"]))
+    .collect()
     )
 
     print("Loading phenotype matrix...")
@@ -132,7 +137,7 @@ def main(phenotype_metadata,psi_matrix,sample_metadata,QC,KEEP_XY):
     # -------------------------
     # QC filtering
     # -------------------------
-    sm = pl.read_csv(sample_metadata, separator="\t")
+    sm = pl.read_csv(sample_metadata, separator="\t", columns=["sample_id", "rna_qc_passed","genotype_qc_passed"])
 
     if(KEEP_XY):
         pheno = filter_phenotype(pheno, pheno_meta,True)
